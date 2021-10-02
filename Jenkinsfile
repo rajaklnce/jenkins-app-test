@@ -15,6 +15,7 @@ pipeline {
     stage('pull request comment'){
       steps{  
           sh 'mvn clean install'
+          pullRequest.comment('This PR is highly illogical..')
         }
       }
     }
