@@ -16,7 +16,11 @@ pipeline {
       steps{  
         script {
             sh 'mvn clean install'
-            pullRequest.comment('This PR is highly illogical..')
+            sh ''''
+            curl -s -H "Authorization: token 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" \
+ -X POST -d '{"body": "Your Message to Comment"}' \
+ "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
+            '''
           }
         }
       }
