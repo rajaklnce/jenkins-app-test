@@ -10,7 +10,9 @@ pipeline {
     }
     stage('pull request comment'){
       steps{ 
-        def comment = pullRequest.comment('This PR is highly illogical..')
+        script {
+          def comment = pullRequest.comment('This PR is highly illogical..')
+        }
       }
     }
   }
