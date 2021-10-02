@@ -9,10 +9,9 @@ pipeline {
       }
     }
     stage('pull request comment'){
-      when {
-        branch "PR-*" 
-      }   
-      def comment = pullRequest.comment('This PR is highly illogical..')
+      steps{ 
+        def comment = pullRequest.comment('This PR is highly illogical..')
+      }
     }
   }
 }
