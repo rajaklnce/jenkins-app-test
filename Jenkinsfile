@@ -25,4 +25,15 @@ pipeline {
         }
       }
     }
+    post {
+      failure {
+        script {
+          sh '''
+            curl -s -H "Authorization: token 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" \
+ -X POST -d '{"body": "failed"}' \
+ "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
+            '''
+        }
+      }
+    }
   }
