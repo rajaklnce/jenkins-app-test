@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+        maven '3.8.2' 
+    }
   
   stages {
     stage('first step'){
@@ -10,9 +13,7 @@ pipeline {
     }
     stage('pull request comment'){
       steps{  
-          withGroovy(tool: '3.8.2'){
-            sh 'mvn clean install'
-          }
+          sh 'mvn clean install'
         }
       }
     }
