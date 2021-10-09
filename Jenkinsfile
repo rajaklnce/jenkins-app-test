@@ -24,7 +24,7 @@ pipeline {
       failure {
         script {
           sh '''
-            curl -s -H "Authorization: token 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" \
+            curl -s -H "Authorization: token <GITHUb personal token>" \
  -X POST -d '{"body": "BUILD FAILED"}' \
  "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
             '''
@@ -33,7 +33,7 @@ pipeline {
       success {
         script {
           sh '''
-            curl -s -H "Authorization: token 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" \
+            curl -s -H "Authorization: token <GITHUb personal token>" \
  -X POST -d '{"body": "BUILD SUCCESS"}' \
  "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
             '''
