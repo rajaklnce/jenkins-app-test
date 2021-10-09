@@ -6,13 +6,13 @@ pipeline {
     }
   
   stages {
-    stage('first step'){
+    stage('First Stage'){
       steps {
         sh 'cat README.md'
         println('success')
       }
     }
-    stage('pull request comment'){
+    stage('BUILD'){
       steps{  
         script {
             sh 'mvn clean install'
