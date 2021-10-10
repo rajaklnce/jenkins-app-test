@@ -22,21 +22,27 @@ pipeline {
     }
     post {
       failure {
-        script {
-          sh '''
-            curl -s -H "Authorization: token <GITHUb personal token>" \
- -X POST -d '{"body": "BUILD FAILED"}' \
- "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
-            '''
+        ## Taking password token from jenkins creds for security purpose
+        withCredentials([usernamePassword(credentialsId: 'github-token-creds', passwordVariable: 'pass-token', usernameVariable: 'user')]) {
+          script {
+            sh '''
+              curl -s -H "Authorization: token $pass-token" \
+   -X POST -d '{"body": "BUILD FAILED"}' \
+   "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
+              '''
+          }
         }
       }
       success {
-        script {
-          sh '''
-            curl -s -H "Authorization: token <GITHUb personal token>" \
- -X POST -d '{"body": "BUILD SUCCESS"}' \
- "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
-            '''
+        ## Taking password token from jenkins creds for security purpose
+        withCredentials([usernamePassword(credentialsId: 'github-token-creds', passwordVariable: 'pass-token', usernameVariable: 'user')]) {
+          script {
+            sh '''
+              curl -s -H "Authorization: token $pass-token" \
+   -X POST -d '{"body": "BUILD SUCCESS"}' \
+   "https://api.github.com/repos/rajaklnce/jenkins-app-test/issues/${CHANGE_ID}/comments"
+              '''
+          }
         }
       }
     }
